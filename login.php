@@ -1,18 +1,21 @@
 <?php
-include('inc/db_config.php');
+
 // Adding the session for checking isLogin Or Not
 session_start();
-if(isset($_SESSION['userId'])){
+if(isset($_SESSION['active'])){
     header('Location: index.php?message=alreadylogin');
     exit();
 }
+
+include('inc/db_config.php');
+
 // Checking the click action of login button
 if(isset($_POST['Login'])){
     $username       = validate($_POST['username']);
     $password       = validate($_POST['password']);
     $hidden         = validate($_POST['hidden']);
 
-    echo $username.$password.'Hidden: '.$hidden;
+    //echo $username.$password.'Hidden: '.$hidden;
 
     if(empty($username) || empty($password)){
         header('Location: login.php?message=empty');
@@ -29,16 +32,22 @@ if(isset($_POST['Login'])){
         if ($user_exist > 0) {
             // If User Exist Then Let Him/Her Into Index Page And Store the user value into session
             if ($row = mysqli_fetch_assoc($result)) {
-                
-                $_SESSION['userId']         = $row['id'];
-                $_SESSION['username']       = $row['username'];
-                $_SESSION['email']          = $row['email'];
-                $_SESSION['phone']          = $row['phone'];
-                $_SESSION['password']       = $row['password'];
-                $_SESSION['priority']       = $row['priority'];
+                if ($row['active'] > 0) {
+                    
+                    $_SESSION['userId']         = $row['id'];
+                    $_SESSION['username']       = $row['username'];
+                    $_SESSION['email']          = $row['email'];
+                    $_SESSION['phone']          = $row['phone'];
+                    $_SESSION['password']       = $row['password'];
+                    $_SESSION['active']         = $row['active'];
+                    $_SESSION['priority']       = $row['priority'];
 
-                header('Location: index.php?message=success');
-                exit();
+                    header('Location: index.php?message=success');
+                    exit();
+                } else {
+                    header('Location: login.php?message=notapproved');
+                    exit();
+                }
             }
         } else {
             header('Location: login.php?message=notExist');
@@ -75,10 +84,10 @@ if(isset($_POST['Login'])){
                     echo '<h5>Only Human Inside.</h5>';
                 }
                 if ($message == 'notExist') {
-                    echo '<h5>User Not Exist. Plese check the email or password.</h5>';
+                    echo '<h5>User Not Exist. Please check the email or password.</h5>';
                 }
-                if ($message == 'success') {
-                    echo '<h5>User Exist :).</h5>';
+                if ($message == 'notapproved') {
+                    echo '<h5>You are not approve user. Wait for admin approve.</h5>';
                 }
             }
             ?>
