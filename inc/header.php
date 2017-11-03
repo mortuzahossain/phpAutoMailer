@@ -6,6 +6,9 @@ if(! isset($_SESSION['active'])){
     exit();
 }
 
+
+include('inc/db_config.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -79,9 +82,9 @@ if(! isset($_SESSION['active'])){
 			</li>
 			<li>
 				<a href="">
-					<i class="fa fa-pie-chart nav_icon"></i>
+					<i class="fa fa-check nav_icon"></i>
 					<span class="nav-text">
-						Charts
+						Todo
 					</span>
 				</a>
 			</li>

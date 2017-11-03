@@ -1,20 +1,33 @@
 <?php
 include 'inc/header.php';
+
 ?>
 
-<?php if (isset($_GET['message'])) { ?>
+
+<?php if (isset($_GET['message'])) { $message = $_GET['message']; ?>
 
 <div class="clearfix"> </div>
 <div class="message container">
 	<div class="row">
 		<div class="col-m4-12 text-center">
-			<h2>Welcome <?php echo $_SESSION['username']; ?></h2>
+		<?php
+
+		 	if ($message == 'success'){
+				echo "<h2>Welcome ".$_SESSION['username']."</h2>";
+			}
+		 	if ($message == 'taskadded'){
+				echo "<h2>Task Added successfully.</h2>";
+			}
+		 	if ($message == 'error'){
+				echo "<h2>Some error occurred during adding task.</h2>";
+			}
+			
+		?>
 		</div>
 	</div>
 </div>
 
 <?php } ?>
-
 
 <div class="main-grid">
 	<div class="social grid">
@@ -94,35 +107,55 @@ include 'inc/header.php';
 			</div>
 		</div>
 		<div class="col-md-8 chart-left">
-			<!-- updating-data -->
+
+
 			<div class="agile-Updating-grids">
 				<div class="area-grids-heading">
 					<h3 class="text-center">::: Todo :::</h3>
-					<form action="" method="post" class="form-inline text-center">
-                        <input class="form-control" type="text" name="todo" placeholder="To do task...">
-                        <button type="submit" class="btn btn-primary form-control">Save</button>
+					<form action="inc/functions.php" method="post" class="form-inline text-center">
+                        <input class="form-control" type="text" name="todo" placeholder="To do task..." required="1">
+                        <button type="submit" name="task_save" class="btn btn-primary form-control">Save</button>
                     </form>
 					<hr>
+<?php
+$sql 			= "SELECT tasks FROM todos WHERE visibility = 1 ORDER BY id DESC LIMIT 10";
+$result         = mysqli_query($con,$sql);
+$have_tasks     = mysqli_num_rows($result);
+if($have_tasks>0){
+	// Making Tasks Array
+	while ($row = mysqli_fetch_assoc($result)) {
+	    $tasks[] = $row;
+	}
+	$serial_no = 0;
+?>
 					<table class="table table-striped" id="table">
                         <tbody>
                         	<tr>
 	                            <td width="10%">#</td>
 	                            <td width="80%">Task</td>
 	                            <td width="20%" class="text-center">Action</td>
-	                        </tr>
+							</tr>
+<?php foreach ($tasks as $key) { $serial_no++; ?>							
 	                        <tr>
-	                            <td width="10%">1</td>
-	                            <td width="80%">This is test Task</td>
-	                            <td width="20%"><a class="btn btn-primary mybtn">Update</a></td>
-	                        </tr>
+	                            <td width="10%"><?php echo $serial_no; ?></td>
+	                            <td width="80%"><?php echo $key['tasks']; ?></td>
+	                            <td width="20%"><a  class="btn btn-primary mybtn">Update</a></td>
+							</tr>
+<?php } ?>						
                     	</tbody>
                 	</table>
+<?php } else { ?>
+<h2>No Tasks Available .</h2>
+<?php } ?>
 				</div>
 			</div>
 		</div>
 		<div class="clearfix"> </div>
 	</div>
 </div>
+
+
+
 
 
 
