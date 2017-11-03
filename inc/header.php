@@ -81,7 +81,7 @@ include('inc/db_config.php');
 				</ul>
 			</li>
 			<li>
-				<a href="">
+				<a href="todo.php">
 					<i class="fa fa-check nav_icon"></i>
 					<span class="nav-text">
 						Todo
