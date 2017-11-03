@@ -60,7 +60,7 @@ if(isset($_POST['Login'])){
 
 <!DOCTYPE html>
 <head>
-    <title>PPH - AutoMailer || Mortuza Hossain</title>
+    <title>PHP - AutoMailer || Mortuza Hossain</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -88,6 +88,9 @@ if(isset($_POST['Login'])){
                 }
                 if ($message == 'notapproved') {
                     echo '<h5>You are not approve user. Wait for admin approve.</h5>';
+                }
+                if ($message == 'accessdenied') {
+                    echo '<h5>Access denied . Please Login first.</h5>';
                 }
             }
             ?>
