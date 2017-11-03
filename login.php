@@ -92,6 +92,9 @@ if(isset($_POST['Login'])){
                 if ($message == 'accessdenied') {
                     echo '<h5>Access denied . Please Login first.</h5>';
                 }
+                if ($message == 'logout') {
+                    echo '<h5>Logout Successfull.</h5>';
+                }
             }
             ?>
             

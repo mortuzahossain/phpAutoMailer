@@ -1111,10 +1111,13 @@ nav li {
     i.fa.fa-cogs,
     i.fa.fa-check-square-o.nav_icon,
     i.fa.fa-file-text-o.nav_icon,
-    i.fa.fa-bar-chart.nav_icon,
+    i.fa.fa-pie-chart.nav_icon,
     i.fa.fa-map-marker,
     i.fa.fa-exclamation-triangle,
-    i.fa.fa-list-ul {
+    i.fa.fa-list-ul ,
+    i.fa.fa-folder,
+    i.fa.fa-users
+    {
         position: relative;
         display: table-cell;
         width: 60px;
@@ -2246,6 +2249,21 @@ ul.dropdown-menu.drp-mnu li {
 .comments-icon i.fa.fa-facebook {
     font-size: 5em;
     color: #6C8CD0;
+}
+
+.comments-icon i.fa.fa-trash {
+    font-size: 5em;
+    color: #ffffff;
+}
+.comments-icon i.fa-envelope-open {
+    font-size: 5em;
+    color: #ffffff;
+}.comments-icon i.fa-database {
+    font-size: 5em;
+    color: #ffffff;
+}.comments-icon i.fa-envelope {
+    font-size: 5em;
+    color: #ffffff;
 }
 
 .comments-icon i.fa.fa-twitter {
@@ -6553,4 +6571,17 @@ p.user-name {
 }
 a.btn.btn-primary.mybtn {
     padding: 6px 10px;
+}
+
+.message {
+    margin-top: 50px;
+}
+
+h3.text-center {
+    text-transform: uppercase;
+}
+
+.table-striped > tbody > tr:nth-of-type(1) {
+    background-color: #00bcd4;
+    color: #ffffff;
 }
